@@ -7,10 +7,15 @@ class ChangeFinder
   end
 
   def score x
+    # first learning as outlier score
     o = @outlier_analyze.next x
+
+    # smooth outlier score time series data
     @ts_data_buffer.push o
     @ts_data_buffer.shift if @ts_data_buffer.size > @smooth_term
     smoothed_o = Utils.smooth @ts_data_buffer, @smooth_term
+
+    # second learning as change point score
     @change_point_analyze.next smoothed_o
   end
 
