@@ -75,7 +75,7 @@ ls example/result.tsv
 rake check
 ```
 
-- create graph from `example/result.tsv` using like google docs
+- create graph from `example/result.tsv` including outlier point using like google docs
 
 ![](images/simulate_check.png)
 
