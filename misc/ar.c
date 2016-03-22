@@ -1,8 +1,8 @@
 // create simulation data created by ar moder, White noise and change point
 // parameter
 // gcc -lm ar.c -o ar
-// ./ar number_of_data ar1_coeff ar2_coeff change_point_total
-// ./ar 10000 0.6 0.5 5.0
+// ./ar number_of_data ar1_coeff ar2_coeff change_point_time change_point_total change_point_decrease expected_value_for_white_noise variance_value_white_noise
+// ./ar 10000 0.6 0.5 5.0 0.5 0.0 1.0
 
 #include <stdio.h>
 #include <math.h>
@@ -25,10 +25,18 @@ static double white_noise(double ex, double sigma) {
 
 int main(int argc, char **argv) {
 
-  int k, t, s, max_points;
+  int k, t, s;
   double *x, *z, *a, *e, *u;
 
+  // the number of time series data
+  int max_points = 10000;
+
+  // ar coefficient parameter
+  double ar1_coeff = 0.6;
+  double ar2_coeff = 0.5;
+
   // change point params
+  int change_point_time = 1000;
   double expected_change_total = 5.0;
   double decrease_change_value = 0.5;
 
@@ -36,17 +44,11 @@ int main(int argc, char **argv) {
   double expected_value = 0.0;
   double variance_value = 1.0;
 
-  if (argc != 5) {
-    fprintf(stderr, "Usage : %s number_of_data ar1_coeff ar2_coeff change_point_total\n",
+  if (argc != 9) {
+    fprintf(stderr, "Usage : %s number_of_data ar1_coeff ar2_coeff change_point_time change_point_total change_point_decrease expected_value_for_white_noise variance_value_white_noise\n",
             argv[0]);
     exit(1);
   }
-
-  // ar coefficient order
-  k = 2;
-
-  // the number of time series data
-  max_points = atoi(argv[1]);
 
   if ((x = (double *)malloc((max_points + 1) * sizeof(double))) == NULL)
     goto MALLOC_ERROR;
@@ -59,17 +61,29 @@ int main(int argc, char **argv) {
   if ((u = (double *)malloc((max_points + 1) * sizeof(double))) == NULL)
     goto MALLOC_ERROR;
 
-  t = 1;
-  s = 1;
+  // ar coefficient order
+  k = 2;
+
+  // the number of time series data
+  max_points = atoi(argv[1]);
+  ar1_coeff = atof(argv[2]);
+  ar2_coeff = atof(argv[3]);
+  change_point_time = atoi(argv[4]);
+  expected_change_total = atof(argv[5]);
+  decrease_change_value = atof(argv[6]);
+  expected_value = atof(argv[7]);
+  variance_value = atof(argv[8]);
 
   // setup ar coefficient
   a[0] = 0;
-  a[1] = atof(argv[2]);
-  a[2] = atof(argv[3]);
+  a[1] = ar1_coeff;
+  a[2] = ar2_coeff;
 
   // Change Points Initial Value
-  expected_change_total = atof(argv[4]);
   u[0] = expected_change_total;
+
+  t = 1;
+  s = 1;
 
   while (t <= max_points) {
     if (t > 2) {
@@ -79,7 +93,7 @@ int main(int argc, char **argv) {
       x[t] = z[t] + u[t];
 
       // Change Points Create Rull
-      if (t == 1000 * s) {
+      if (t == change_point_time * s) {
         u[t] += u[0] - decrease_change_value;
         u[0] -= decrease_change_value;
         s++;
