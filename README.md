@@ -4,6 +4,16 @@ ChangeFinder class detect change points via continuous outlier and smoothing.
 
 See also [the paper](http://dl.acm.org/citation.cfm?id=775148).
 
+## Sample
+
+- input trend data and output change-point score
+
+![](images/trend_and_score.png)
+
+- output change-point score only
+
+![](images/score.png)
+
 ## install by mrbgems
 - add conf.gem line to `build_config.rb`
 
