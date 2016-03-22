@@ -13,7 +13,7 @@ end
 ```
 ## example
 ```ruby
-# ChangeFinder.new outlier_term, outlier_discount_param, change_point_term, change_point_discount_param, smooth_term
+# ChangeFinder.new sdar_order_for_outlier, outlier_discount_param, sdar_order_for_change_point, change_point_discount_param, smooth_term
 > cf = ChangeFinder.new 3, 0.1, 3, 0.1, 5
  => #<ChangeFinder:0x7fad5c80be50 @ts_data_buffer=[], @change_point_analyze=#<ChangeFinder::SDAR:0x7fad5c80bb80>, @smooth_term=5, @outlier_analyze=#<ChangeFinder::SDAR:0x7fad5c80be20>>
 > cf.learn [1,2,1,2,3,2,1,2,1]
