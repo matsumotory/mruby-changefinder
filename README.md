@@ -14,6 +14,8 @@ See also [the paper](http://dl.acm.org/citation.cfm?id=775148).
 
 ![](images/score.png)
 
+See also @kentaro 's [blog entry (JA)](http://blog.kentarok.org/entry/2016/03/21/015037).
+
 ## install by mrbgems
 - add conf.gem line to `build_config.rb`
 
