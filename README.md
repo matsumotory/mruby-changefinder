@@ -69,6 +69,16 @@ ls example/result.tsv
 
 ![](images/cf_simulation.png)
 
+## Simulate data automatically
+
+```
+rake check
+```
+
+- create graph from `example/result.tsv` using like google docs
+
+![](images/simulate_check.png)
+
 ## License
 under the MIT License:
 - see LICENSE file
