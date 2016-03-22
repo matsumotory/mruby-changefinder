@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 static double white_noise(double ex, double sigma)
 {
@@ -32,6 +33,7 @@ int main(int argc, char **argv)
 
   // the number of time series data
   int max_points = 10000;
+  int outlier_point;
 
   // ar coefficient parameter
   double ar1_coeff = 0.6;
@@ -45,6 +47,9 @@ int main(int argc, char **argv)
   // white noise params
   double expected_value = 0.0;
   double variance_value = 1.0;
+
+  srand((unsigned)time(NULL));
+  outlier_point = rand() % max_points;
 
   if (argc != 9) {
     fprintf(stderr, "Usage : %s number_of_data ar1_coeff ar2_coeff "
@@ -103,13 +108,18 @@ int main(int argc, char **argv)
         u[0] -= decrease_change_value;
         s++;
       }
+
     } else {
       u[t] = u[t - 1];
       e[t] = white_noise(expected_value, variance_value);
       x[t] = e[t];
     }
 
-    printf("% lf\n", x[t]);
+    if (t == outlier_point) {
+      printf("% lf\n", expected_change_total);
+    } else {
+      printf("% lf\n", x[t]);
+    }
     t++;
   }
 
