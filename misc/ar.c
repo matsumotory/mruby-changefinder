@@ -10,22 +10,22 @@
 #include <math.h>
 #include <stdlib.h>
 
-static double white_noise(double ex, double sigma) {
+static double white_noise(double ex, double sigma)
+{
   int i;
   double r;
 
   while (1) {
     r = (double)rand() / RAND_MAX;
-    if (1.0 / sqrt(2 * M_PI * sigma) *
-            exp(-(r - ex) * (r - ex) / 2.0 / sigma / sigma) >=
-        (double)rand() / RAND_MAX)
+    if (1.0 / sqrt(2 * M_PI * sigma) * exp(-(r - ex) * (r - ex) / 2.0 / sigma / sigma) >= (double)rand() / RAND_MAX)
       break;
   }
 
   return r;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 
   int k, t, s;
   double *x, *z, *a, *e, *u;
