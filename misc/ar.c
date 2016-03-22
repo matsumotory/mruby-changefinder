@@ -116,7 +116,7 @@ int main(int argc, char **argv)
     }
 
     if (t == outlier_point) {
-      printf("% lf\n", expected_change_total);
+      printf("% lf\n", x[t] + expected_change_total);
     } else {
       printf("% lf\n", x[t]);
     }

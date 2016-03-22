@@ -19,6 +19,14 @@ task :test => :mruby do
   sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} rake all test"
 end
 
+desc "check"
+task :check => :mruby do
+  sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} rake"
+  sh "cd misc && make test"
+  sh "./mruby/bin/mruby ./example/cf.rb"
+  sh "ls -l ./example/result.tsv"
+end
+
 desc "cleanup"
 task :clean do
   sh "cd mruby && rake deep_clean"
