@@ -41,6 +41,34 @@ end
 >
 ```
 
+## Support tools
+- create simulation data using ar model, white noise and change points
+
+```
+cd misc/
+make
+```
+
+```
+# ./ar number_of_data ar1_coeff ar2_coeff change_point_time change_point_total change_point_decrease expected_value_for_white_noise variance_value_white_noise
+./ar 10000 0.6 0.5 2000 5 1 0.0 1.0 > ar.tsv
+```
+
+- create graph from `ar.tsv`
+
+![](images/simulation.png)
+
+- analyze `ar.tsv` by ChangeFinder
+
+```
+./mruby/bin/mruby example/cf.rb
+ls example/result.tsv
+```
+
+- create graph from `result.tsv`
+
+![](images/cf_simulation.png)
+
 ## License
 under the MIT License:
 - see LICENSE file
