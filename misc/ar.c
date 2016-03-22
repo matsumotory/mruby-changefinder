@@ -1,7 +1,9 @@
 // create simulation data created by ar moder, White noise and change point
 // parameter
 // gcc -lm ar.c -o ar
-// ./ar number_of_data ar1_coeff ar2_coeff change_point_time change_point_total change_point_decrease expected_value_for_white_noise variance_value_white_noise
+// ./ar number_of_data ar1_coeff ar2_coeff change_point_time change_point_total
+// change_point_decrease expected_value_for_white_noise
+// variance_value_white_noise
 // ./ar 10000 0.6 0.5 5.0 0.5 0.0 1.0
 
 #include <stdio.h>
@@ -45,7 +47,10 @@ int main(int argc, char **argv) {
   double variance_value = 1.0;
 
   if (argc != 9) {
-    fprintf(stderr, "Usage : %s number_of_data ar1_coeff ar2_coeff change_point_time change_point_total change_point_decrease expected_value_for_white_noise variance_value_white_noise\n",
+    fprintf(stderr, "Usage : %s number_of_data ar1_coeff ar2_coeff "
+                    "change_point_time change_point_total "
+                    "change_point_decrease expected_value_for_white_noise "
+                    "variance_value_white_noise\n",
             argv[0]);
     exit(1);
   }
