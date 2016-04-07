@@ -22,7 +22,7 @@ class ChangeFinder
       @r = params[:r]
       @mu = params[:mu]
       @term = params[:term]
-      @data = params[:data]
+      @data = params[:data].dup
       @sigma = params[:sigma]
       @c = params[:c]
     end

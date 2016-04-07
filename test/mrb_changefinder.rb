@@ -47,9 +47,11 @@ assert 'ChangeFinder#{dump, restore}' do
 
   cf.score(5)
 
-  d = cf.dump
-  cf_dump.restore d
+  assert_not_equal cf.dump, cf_dump.dump
 
-  assert_equal d, cf_dump.dump
+  cf_dump.restore cf.dump
+
+  assert_equal cf.dump, cf_dump.dump
+  assert_equal cf.score(1).round(13), cf_dump.score(1).round(13)
 end
 
