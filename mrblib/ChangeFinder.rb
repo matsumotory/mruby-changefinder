@@ -23,6 +23,16 @@ class ChangeFinder
     data.inject([]) { |result, x| result << score(x) }
   end
 
+  def dump
+    {:outlier => @outlier_analyze.dump, :change_point => @change_point_analyze.dump, :ts_data_buffer => @ts_data_buffer}
+  end
+
+  def restore d
+    @outlier_analyze.restore d[:outlier]
+    @change_point_analyze.restore d[:change_point]
+    @ts_data_buffer = d[:ts_data_buffer]
+  end
+
   def status
     [{:outlier_data => @ts_data_buffer}, @outlier_analyze.show_status, @change_point_analyze.show_status]
   end

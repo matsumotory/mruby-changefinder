@@ -18,13 +18,13 @@ class ChangeFinder
       {:r => @r, :mu => @mu, :term => @term, :data => @data, :sigma => @sigma, :c => @c}
     end
 
-    def restore params
-      @r = params[:r]
-      @mu = params[:me]
-      @term = params[:term]
-      @data = params[:data]
-      @sigma = params[:sigma]
-      @c = params[:c]
+    def restore d
+      @r = d[:r]
+      @mu = d[:mu]
+      @term = d[:term]
+      @data = d[:data]
+      @sigma = d[:sigma]
+      @c = d[:c]
     end
 
     def next x
