@@ -14,6 +14,19 @@ class ChangeFinder
       @c = (0..@term - 1).map { |i| rand }
     end
 
+    def dump
+      {:r => @r, :mu => @mu, :term => @term, :data => @data, :sigma => @sigma, :c => @c}
+    end
+
+    def restore params
+      @r = params[:r]
+      @mu = params[:me]
+      @term = params[:term]
+      @data = params[:data]
+      @sigma = params[:sigma]
+      @c = params[:c]
+    end
+
     def next x
       len = @data.size
       @mu = (1 - @r) * @mu + @r * x

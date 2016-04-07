@@ -15,6 +15,21 @@ assert "ChangeFinder::SDAR#score" do
   assert_equal 0.69314718055995, ChangeFinder::SDAR.new(3, 0.1).score(0.5).round(14)
 end
 
+assert 'ChangeFinder::SDAR#{dump, restore}' do
+  cf = ChangeFinder::SDAR.new(3, 0.1)
+  cf.score(0.5)
+  d = cf.dump
+  score = cf.score(0.1)
+
+  cf_dump = ChangeFinder::SDAR.new(3, 0.1)
+  cf_dump.restore d
+
+  score_dump = cf_dump.score(0.1)
+
+  assert_equal 2.302585092994, score.round(13)
+  assert_equal score, score_dump
+end
+
 # ChangeFinder::Utils class
 assert "ChangeFinder::Utils.smooth" do
   assert_equal 2, ChangeFinder::Utils.smooth([1,2,3], 3)
