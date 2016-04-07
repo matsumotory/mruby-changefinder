@@ -27,10 +27,10 @@ class ChangeFinder
     {:outlier => @outlier_analyze.dump, :change_point => @change_point_analyze.dump, :ts_data_buffer => @ts_data_buffer}
   end
 
-  def restore params
-    @outlier_analyze.restore params[:outlier]
-    @change_point_analyze.restore params[:change_point]
-    @ts_data_buffer = params[:ts_data_buffer]
+  def restore d
+    @outlier_analyze.restore d[:outlier]
+    @change_point_analyze.restore d[:change_point]
+    @ts_data_buffer = d[:ts_data_buffer]
   end
 
   def status

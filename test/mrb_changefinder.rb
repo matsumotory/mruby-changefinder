@@ -17,12 +17,11 @@ end
 
 assert 'ChangeFinder::SDAR#{dump, restore}' do
   cf = ChangeFinder::SDAR.new(3, 0.1)
+  cf_dump = ChangeFinder::SDAR.new(3, 0.1)
+
   cf.next(0.5)
 
-  d = cf.dump
-
-  cf_dump = ChangeFinder::SDAR.new(3, 0.1)
-  cf_dump.restore d
+  cf_dump.restore cf.dump
 
   assert_equal cf.next(0.1).round(14), cf_dump.next(0.1).round(14)
 end
@@ -45,11 +44,14 @@ assert 'ChangeFinder#{dump, restore}' do
   cf = ChangeFinder.new(3, 0.1, 3, 0.1, 4)
   cf_dump = ChangeFinder.new(3, 0.1, 3, 0.1, 4)
 
+  assert_equal cf.score(1), cf_dump.score(1)
+
+  # update new coefficient of cf instance
   cf.score(5)
 
-  d = cf.dump
-  cf_dump.restore d
+  # update new coefficient from cf instance dump data
+  cf_dump.restore cf.dump
 
-  assert_equal d, cf_dump.dump
+  assert_equal cf.score(1), cf_dump.score(1)
 end
 
