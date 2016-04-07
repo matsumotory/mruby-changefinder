@@ -20,7 +20,7 @@ class ChangeFinder
 
     def restore params
       @r = params[:r]
-      @mu = params[:me]
+      @mu = params[:mu]
       @term = params[:term]
       @data = params[:data]
       @sigma = params[:sigma]
