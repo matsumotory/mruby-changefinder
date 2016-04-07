@@ -30,7 +30,7 @@ class ChangeFinder
   def restore params
     @outlier_analyze.restore params[:outlier]
     @change_point_analyze.restore params[:change_point]
-    @ts_data_buffer = params[:ts_data_buffer]
+    @ts_data_buffer = params[:ts_data_buffer].dup
   end
 
   def status
