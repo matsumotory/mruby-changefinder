@@ -1,4 +1,4 @@
-# mruby-changefinder   [![Build Status](https://travis-ci.org/matsumoto-r/mruby-changefinder.png?branch=master)](https://travis-ci.org/matsumoto-r/mruby-changefinder)
+# mruby-changefinder   [![Build Status](https://travis-ci.org/matsumotory/mruby-changefinder.png?branch=master)](https://travis-ci.org/matsumotory/mruby-changefinder)
 
 ChangeFinder class detect change points via continuous outlier and smoothing.
 
