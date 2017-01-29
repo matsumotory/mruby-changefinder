@@ -31,8 +31,6 @@ class ChangeFinder
       len = @data.size
       @mu = (1 - @r) * @mu + @r * x
 
-      c = @sigma
-
       (0..(@term - 1)).each do |j|
         @c[j] = (1 - @r) * @c[j] + @r * (x - @mu) * (@data[len - 1 - j] - @mu) if @data[len - 1 - j]
       end
