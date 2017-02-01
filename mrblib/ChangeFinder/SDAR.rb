@@ -43,7 +43,7 @@ class ChangeFinder
         (j..(@term - 1)).each { |i| cc[j][i] = cc[i][j] = @c[i - j]}
       end
 
-      w = (Matrix.rows(cc).inv * Vector.elements(@c)).to_a
+      w = Matrix.rows(cc).lup.solve(Vector.elements(@c)).to_a
       xt = @data.each_with_index.inject(@mu) { |sum, vidx| sum += w[vidx[1]] * (vidx[0] - @mu)}
       @sigma = (1 - @r) * @sigma + @r * (x - xt) * (x - xt)
 
